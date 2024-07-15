@@ -1,0 +1,6 @@
+# 接口文档配置
+knife4j:
+  enable: false
+mybatis-plus:
+  configuration:
+    log-impl:

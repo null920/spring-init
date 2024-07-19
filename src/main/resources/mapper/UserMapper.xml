@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.light.springinit.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.light.springinit.domain.entity.User">
+        <id property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="userAvatar" column="user_avatar" jdbcType="VARCHAR"/>
+        <result property="userProfile" column="user_profile" jdbcType="VARCHAR"/>
+        <result property="userRole" column="user_role" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="deleted" column="deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,username,password,
+        phone,email,user_avatar,
+        user_profile,user_role,create_time,
+        update_time,deleted
+    </sql>
+
+    <select id="findByUsername" resultMap="BaseResultMap">
+        select * from user where deleted=0
+        <if test="username!=null">AND username = #{username}</if>
+    </select>
+    <select id="findUserById" resultMap="BaseResultMap">
+        select * from user where deleted=0
+        <if test="userId!=null">AND user_id = #{userId}</if>
+    </select>
+</mapper>

@@ -1,34 +1,26 @@
 package com.light.springinit.common;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.io.Serializable;
 
 /**
- * 通用返回类
+ * 通用出参
  *
- * @param <T>
+ * @author null&&
+ * @Date 2024/7/16 17:04
  */
-@Data
-public class BaseResponse<T> implements Serializable {
+@Setter
+@Getter
+@ToString
+public class BaseResponse implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    private int code;
+    private Boolean success;
 
-    private T data;
+    private String responseCode;
 
-    private String message;
-
-    public BaseResponse(int code, T data, String message) {
-        this.code = code;
-        this.data = data;
-        this.message = message;
-    }
-
-    public BaseResponse(int code, T data) {
-        this(code, data, "");
-    }
-
-    public BaseResponse(ErrorCode errorCode) {
-        this(errorCode.getCode(), null, errorCode.getMessage());
-    }
+    private String responseMessage;
 }

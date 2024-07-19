@@ -1,113 +1,54 @@
 package com.light.springinit.service;
 
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.light.springinit.model.dto.user.UserQueryRequest;
-import com.light.springinit.model.entity.User;
-import com.light.springinit.model.vo.LoginUserVO;
-import com.light.springinit.model.vo.UserVO;
-
-
-import java.util.List;
+import com.light.springinit.common.response.UserOperateResponse;
+import com.light.springinit.common.response.UserQueryResponse;
+import com.light.springinit.domain.dto.UserLoginRequest;
+import com.light.springinit.domain.dto.UserQueryRequest;
+import com.light.springinit.domain.dto.UserRegisterRequest;
+import com.light.springinit.domain.entity.User;
+import com.light.springinit.domain.info.UserInfo;
+import com.light.springinit.domain.vo.LoginVO;
 
 /**
- * 用户服务
+ * 用户服务接口
+ *
+ * @author Ycri
+ * @description 针对表【user(用户)】的数据库操作Service
+ * @createDate 2024-07-19 17:37:29
  */
 public interface UserService extends IService<User> {
 
     /**
      * 用户注册
      *
-     * @param userAccount   用户账户
-     * @param userPassword  用户密码
-     * @param checkPassword 校验密码
-     * @return 新用户 id
+     * @param userRegisterRequest 用户注册请求
+     * @return 注册结果
      */
-    long userRegister(String userAccount, String userPassword, String checkPassword);
+    UserOperateResponse userRegister(UserRegisterRequest userRegisterRequest);
+
 
     /**
      * 用户登录
      *
-     * @param userAccount  用户账户
-     * @param userPassword 用户密码
-     * @param request
-     * @return 脱敏后的用户信息
+     * @param userLoginRequest 用户登录请求
+     * @return 登录信息VO
      */
-    LoginUserVO userLogin(String userAccount, String userPassword, HttpServletRequest request);
-
+    LoginVO userLogin(UserLoginRequest userLoginRequest);
 
     /**
-     * 获取当前登录用户
+     * 查询用户
      *
-     * @param request
-     * @return
+     * @param userQueryRequest 用户查询请求
+     * @return 用户查询响应
      */
-    User getLoginUser(HttpServletRequest request);
+    UserQueryResponse<UserInfo> query(UserQueryRequest userQueryRequest);
 
     /**
-     * 获取当前登录用户（允许未登录）
+     * 根据 id 获取用户信息
      *
-     * @param request
-     * @return
+     * @param userId 用户id
+     * @return 用户信息
      */
-    User getLoginUserPermitNull(HttpServletRequest request);
-
-    /**
-     * 是否为管理员
-     *
-     * @param request
-     * @return
-     */
-    boolean isAdmin(HttpServletRequest request);
-
-    /**
-     * 是否为管理员
-     *
-     * @param user
-     * @return
-     */
-    boolean isAdmin(User user);
-
-    /**
-     * 用户注销
-     *
-     * @param request
-     * @return
-     */
-    boolean userLogout(HttpServletRequest request);
-
-    /**
-     * 获取脱敏的已登录用户信息
-     *
-     * @return
-     */
-    LoginUserVO getLoginUserVO(User user);
-
-    /**
-     * 获取脱敏的用户信息
-     *
-     * @param user
-     * @return
-     */
-    UserVO getUserVO(User user);
-
-    /**
-     * 获取脱敏的用户信息
-     *
-     * @param userList
-     * @return
-     */
-    List<UserVO> getUserVO(List<User> userList);
-
-    /**
-     * 获取查询条件
-     *
-     * @param userQueryRequest
-     * @return
-     */
-    QueryWrapper<User> getQueryWrapper(UserQueryRequest userQueryRequest);
-
+    User findUserById(Long userId);
 }

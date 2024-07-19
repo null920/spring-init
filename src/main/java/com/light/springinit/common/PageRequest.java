@@ -1,23 +1,28 @@
 package com.light.springinit.common;
 
-import com.light.springinit.constant.CommonConstant;
-import lombok.Data;
+import com.light.springinit.constant.PageConstant;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 分页请求
+ *
+ * @author null&&
+ * @Date 2024/7/19 19:08
  */
-@Data
-public class PageRequest {
+@Setter
+@Getter
+public class PageRequest extends BaseRequest {
+    private static final long serialVersionUID = 1L;
 
     /**
-     * 当前页号
+     * 当前页
      */
-    private int current = 1;
-
+    private int currentPage;
     /**
-     * 页面大小
+     * 每页结果数
      */
-    private int pageSize = 10;
+    private int pageSize;
 
     /**
      * 排序字段
@@ -27,5 +32,5 @@ public class PageRequest {
     /**
      * 排序顺序（默认升序）
      */
-    private String sortOrder = CommonConstant.SORT_ORDER_ASC;
+    private String sortOrder = PageConstant.SORT_ORDER_ASC;
 }

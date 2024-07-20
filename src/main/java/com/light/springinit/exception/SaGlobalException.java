@@ -19,7 +19,7 @@ public class SaGlobalException {
     @ExceptionHandler(NotLoginException.class)
     public SaResult handlerException(NotLoginException e) {
         e.printStackTrace();
-        return SaResult.error(UserErrorCode.USER_NOT_LOGIN.getMessage() + "：" + e.getMessage());
+        return SaResult.error(UserErrorCode.USER_NOT_LOGIN.getMessage());
     }
 
     // 拦截：缺少权限异常

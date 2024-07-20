@@ -5,13 +5,13 @@ import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.light.springinit.common.response.UserOperateResponse;
 import com.light.springinit.common.response.UserQueryResponse;
+import com.light.springinit.constant.UserRole;
 import com.light.springinit.domain.dto.UserLoginRequest;
 import com.light.springinit.domain.dto.UserQueryRequest;
 import com.light.springinit.domain.dto.UserRegisterRequest;
 import com.light.springinit.domain.entity.User;
 import com.light.springinit.domain.entity.convertor.UserConvertor;
 import com.light.springinit.domain.info.UserInfo;
-import com.light.springinit.domain.vo.LoginVO;
 import com.light.springinit.exception.UserException;
 import com.light.springinit.exception.errorcode.UserErrorCode;
 import com.light.springinit.mapper.UserMapper;
@@ -19,8 +19,6 @@ import com.light.springinit.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 /**
  * @author Ycri
@@ -34,8 +32,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 用户注册
+     *
+     * @param userRegisterRequest 用户注册请求
+     * @return 注册结果
+     */
     @Override
     public UserOperateResponse userRegister(UserRegisterRequest userRegisterRequest) {
+        // 判断用户名是否重复
         if (userMapper.findByUsername(userRegisterRequest.getUsername()) != null) {
             throw new UserException(UserErrorCode.USER_NAME_EXIST);
         }
@@ -44,37 +49,61 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         UserOperateResponse registerResult = new UserOperateResponse();
         if (save(user)) {
             User findUser = userMapper.findByUsername(userRegisterRequest.getUsername());
-            Assert.notNull(findUser, UserErrorCode.USER_OPERATE_FAILED.getCode());
+            if (findUser == null) {
+                throw new UserException(UserErrorCode.USER_OPERATE_FAILED);
+            }
             registerResult.setSuccess(true);
         }
         return registerResult;
     }
 
+    /**
+     * 用户登录
+     *
+     * @param userLoginRequest 用户登录请求
+     * @return 登录信息VO
+     */
     @Override
-    public LoginVO userLogin(UserLoginRequest userLoginRequest) {
+    public UserInfo userLogin(UserLoginRequest userLoginRequest) {
         UserQueryRequest userQueryRequest = new UserQueryRequest();
         userQueryRequest.setUsername(userLoginRequest.getUsername());
+        // 查询用户
         UserQueryResponse<UserInfo> userQueryResponse = this.query(userQueryRequest);
         UserInfo userInfo = userQueryResponse.getData();
+        // 用户不存在
         if (userInfo == null) {
             throw new UserException(UserErrorCode.USER_NOT_EXIST);
         }
+        // 用户被封禁
+        if (userInfo.getUserRole() == UserRole.BAN) {
+            throw new UserException(UserErrorCode.USER_STATUS_IS_BAN);
+        }
+        // 密码错误
         if (!userInfo.getPassword().equals(DigestUtil.md5Hex(userLoginRequest.getPassword()))) {
             throw new UserException(UserErrorCode.USER_PASSWORD_ERROR);
         }
-        return new LoginVO(userInfo);
+        return userInfo;
     }
 
+
+    /**
+     * 查询用户
+     *
+     * @param userQueryRequest 用户查询请求
+     * @return 用户查询响应
+     */
     @Override
     public UserQueryResponse<UserInfo> query(UserQueryRequest userQueryRequest) {
         User user = null;
+        // 根据用户id查询
         if (null != userQueryRequest.getUserId()) {
             user = userMapper.findUserById(userQueryRequest.getUserId());
         }
-
+        // 根据用户名查询
         if (user == null || StringUtils.isNotBlank(userQueryRequest.getUsername())) {
             user = userMapper.findByUsername(userQueryRequest.getUsername());
         }
+        // 用户不存在
         if (user == null) {
             throw new UserException(UserErrorCode.USER_NOT_EXIST);
         }
@@ -85,6 +114,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return response;
     }
 
+
+    /**
+     * 根据 id 获取用户信息
+     *
+     * @param userId 用户id
+     * @return 用户信息
+     */
     @Override
     public User findUserById(Long userId) {
         if (userId == null) {

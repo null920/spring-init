@@ -58,6 +58,11 @@ public enum UserErrorCode implements ErrorCode {
     USER_NAME_EXIST("USER_NAME_EXIST", "用户名已存在"),
 
     /**
+     * 用户被封禁
+     */
+    USER_STATUS_IS_BAN("USER_STATUS_IS_BAN", "用户被封禁"),
+
+    /**
      * 用户状态不能进行激活
      */
     USER_STATUS_IS_NOT_AUTH("USER_STATUS_IS_NOT_AUTH", "用户状态不能进行激活");

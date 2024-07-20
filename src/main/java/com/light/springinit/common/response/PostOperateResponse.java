@@ -1,23 +1,20 @@
 package com.light.springinit.common.response;
 
 import com.light.springinit.common.BaseResponse;
-import com.light.springinit.domain.info.UserInfo;
+import com.light.springinit.domain.info.PostInfo;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 用户操作响应
- *
  * @author null&&
- * @Date 2024/7/16 17:59
+ * @Date 2024/7/20 19:33
  */
 @Getter
 @Setter
-public class UserOperateResponse extends BaseResponse {
-
+public class PostOperateResponse extends BaseResponse {
     private static final long serialVersionUID = 1L;
     /**
-     * 用户信息
+     * 帖子信息
      */
-    private UserInfo userInfo;
+    private PostInfo postInfo;
 }

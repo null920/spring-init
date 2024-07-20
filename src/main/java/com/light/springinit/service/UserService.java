@@ -34,7 +34,7 @@ public interface UserService extends IService<User> {
      * @param userLoginRequest 用户登录请求
      * @return 登录信息VO
      */
-    LoginVO userLogin(UserLoginRequest userLoginRequest);
+    UserInfo userLogin(UserLoginRequest userLoginRequest);
 
     /**
      * 查询用户

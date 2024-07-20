@@ -1,10 +1,16 @@
 package com.light.springinit.domain.entity;
 
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import com.light.springinit.domain.dto.PostCreateRequest;
+import com.light.springinit.domain.dto.PostUpdateRequest;
+import com.light.springinit.param.PostCreateParam;
+import com.light.springinit.param.PostUpdateParam;
 import lombok.Data;
 
 /**
@@ -15,6 +21,10 @@ import lombok.Data;
 @TableName(value = "post")
 @Data
 public class Post implements Serializable {
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
+
     /**
      * id
      */
@@ -67,6 +77,24 @@ public class Post implements Serializable {
     @TableLogic
     private Integer deleted;
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
+    public Post add(PostCreateRequest postCreateRequest) {
+        this.setTitle(postCreateRequest.getTitle());
+        this.setContent(postCreateRequest.getContent());
+        List<String> tagList = postCreateRequest.getTags();
+        if (tagList != null) {
+            this.setTags(JSONUtil.toJsonStr(tagList));
+        }
+        return this;
+    }
+
+    public Post update(PostUpdateRequest postUpdateRequest) {
+        this.setPostId(postUpdateRequest.getPostId());
+        this.setTitle(postUpdateRequest.getTitle());
+        this.setContent(postUpdateRequest.getContent());
+        List<String> tagList = postUpdateRequest.getTags();
+        if (tagList != null) {
+            this.setTags(JSONUtil.toJsonStr(tagList));
+        }
+        return this;
+    }
 }

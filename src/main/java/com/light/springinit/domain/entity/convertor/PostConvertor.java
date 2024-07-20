@@ -3,10 +3,13 @@ package com.light.springinit.domain.entity.convertor;
 
 import com.light.springinit.domain.entity.Post;
 import com.light.springinit.domain.info.PostInfo;
+import com.light.springinit.domain.vo.PostVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValueCheckStrategy;
 import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * @author null&&
@@ -23,7 +26,7 @@ public interface PostConvertor {
      * @return
      */
     @Mapping(target = "postId", source = "request.postId")
-    public PostInfo mapToVo(Post request);
+    public PostVO mapToVo(Post request);
 
     /**
      * 转换为实体
@@ -33,4 +36,12 @@ public interface PostConvertor {
      */
     @Mapping(target = "postId", source = "request.postId")
     public Post mapToEntity(PostInfo request);
+
+    /**
+     * list转换为vo
+     *
+     * @param request
+     * @return
+     */
+    public List<PostVO> mapToVo(List<Post> request);
 }

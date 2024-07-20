@@ -1,7 +1,7 @@
 package com.light.springinit.exception;
 
 import com.google.common.collect.Maps;
-import com.light.springinit.common.Result;
+import com.light.springinit.common.result.Result;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

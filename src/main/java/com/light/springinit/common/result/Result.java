@@ -1,5 +1,6 @@
-package com.light.springinit.common;
+package com.light.springinit.common.result;
 
+import com.light.springinit.common.SingleResponse;
 import lombok.Getter;
 import lombok.Setter;
 

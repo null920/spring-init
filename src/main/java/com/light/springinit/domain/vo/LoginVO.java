@@ -1,6 +1,7 @@
 package com.light.springinit.domain.vo;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.light.springinit.constant.UserRole;
 import com.light.springinit.domain.info.UserInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,12 +21,19 @@ import java.io.Serializable;
 @NoArgsConstructor
 @ToString
 public class LoginVO implements Serializable {
+
     private static final long serialVersionUID = 1L;
 
     /**
      * 用户标识，如用户ID
      */
     private String userId;
+
+    /**
+     * 用户角色
+     */
+    private UserRole userRole;
+
     /**
      * 访问令牌
      */
@@ -39,6 +47,7 @@ public class LoginVO implements Serializable {
 
     public LoginVO(UserInfo userInfo) {
         this.userId = userInfo.getUserId().toString();
+        this.userRole = userInfo.getUserRole();
         this.token = StpUtil.getTokenValue();
         this.tokenExpiration = StpUtil.getTokenTimeout();
     }

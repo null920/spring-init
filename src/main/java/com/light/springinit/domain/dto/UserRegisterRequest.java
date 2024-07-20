@@ -1,6 +1,7 @@
 package com.light.springinit.domain.dto;
 
 import com.light.springinit.common.BaseRequest;
+import com.light.springinit.param.UserRegisterParam;
 import lombok.*;
 
 /**
@@ -39,4 +40,12 @@ public class UserRegisterRequest extends BaseRequest {
      * 邮箱
      */
     private String email;
+
+    public UserRegisterRequest(UserRegisterParam userRegisterParam) {
+        this.username = userRegisterParam.getUsername();
+        this.password = userRegisterParam.getPassword();
+        this.checkPassword = userRegisterParam.getCheckPassword();
+        this.phone = userRegisterParam.getPhone();
+        this.email = userRegisterParam.getEmail();
+    }
 }

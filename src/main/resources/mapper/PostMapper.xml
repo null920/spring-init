@@ -5,16 +5,16 @@
 <mapper namespace="com.light.springinit.mapper.PostMapper">
 
     <resultMap id="BaseResultMap" type="com.light.springinit.domain.entity.Post">
-            <id property="postId" column="post_id" jdbcType="BIGINT"/>
-            <result property="title" column="title" jdbcType="VARCHAR"/>
-            <result property="content" column="content" jdbcType="VARCHAR"/>
-            <result property="tags" column="tags" jdbcType="VARCHAR"/>
-            <result property="thumbNum" column="thumb_num" jdbcType="INTEGER"/>
-            <result property="favourNum" column="favour_num" jdbcType="INTEGER"/>
-            <result property="userId" column="user_id" jdbcType="BIGINT"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-            <result property="deleted" column="deleted" jdbcType="TINYINT"/>
+        <id property="postId" column="post_id" jdbcType="BIGINT"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="tags" column="tags" jdbcType="VARCHAR"/>
+        <result property="thumbNum" column="thumb_num" jdbcType="INTEGER"/>
+        <result property="favourNum" column="favour_num" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="deleted" column="deleted" jdbcType="TINYINT"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -23,4 +23,12 @@
         user_id,create_time,update_time,
         deleted
     </sql>
+    <select id="findPostById" resultMap="BaseResultMap">
+        select * from post where deleted=0
+        <if test="postId!=null">AND post_id = #{postId}</if>
+    </select>
+    <select id="findPagePostByUserId" resultMap="BaseResultMap">
+        select * from post where deleted=0
+        <if test="userId!=null">AND user_id = #{userId}</if>
+    </select>
 </mapper>

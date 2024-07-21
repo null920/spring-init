@@ -1,8 +1,6 @@
 package com.light.springinit.domain.vo;
 
-import com.light.springinit.domain.entity.convertor.UserConvertor;
 import com.light.springinit.domain.info.PostInfo;
-import com.light.springinit.domain.info.UserInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

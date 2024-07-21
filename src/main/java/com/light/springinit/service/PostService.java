@@ -1,6 +1,6 @@
 package com.light.springinit.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.light.springinit.common.PageRequest;
 import com.light.springinit.common.PageResponse;
 import com.light.springinit.common.response.PostOperateResponse;
@@ -9,9 +9,7 @@ import com.light.springinit.domain.dto.PostCreateRequest;
 import com.light.springinit.domain.dto.PostQueryRequest;
 import com.light.springinit.domain.dto.PostUpdateRequest;
 import com.light.springinit.domain.entity.Post;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.light.springinit.domain.vo.PostVO;
-import com.light.springinit.param.PostUpdateParam;
 
 /**
  * @author Ycri

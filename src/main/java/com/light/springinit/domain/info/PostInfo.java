@@ -1,7 +1,6 @@
 package com.light.springinit.domain.info;
 
 
-import com.light.springinit.domain.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

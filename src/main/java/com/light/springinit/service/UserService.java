@@ -8,7 +8,6 @@ import com.light.springinit.domain.dto.UserQueryRequest;
 import com.light.springinit.domain.dto.UserRegisterRequest;
 import com.light.springinit.domain.entity.User;
 import com.light.springinit.domain.info.UserInfo;
-import com.light.springinit.domain.vo.LoginVO;
 
 /**
  * 用户服务接口
@@ -51,7 +50,6 @@ public interface UserService extends IService<User> {
      * @return 用户信息
      */
     User findUserById(Long userId);
-
 
     /**
      * 检查用户是否存在和检查用户状态

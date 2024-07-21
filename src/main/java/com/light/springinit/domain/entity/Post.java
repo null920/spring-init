@@ -2,16 +2,13 @@ package com.light.springinit.domain.entity;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.annotation.*;
+import com.light.springinit.domain.dto.PostCreateRequest;
+import com.light.springinit.domain.dto.PostUpdateRequest;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import com.light.springinit.domain.dto.PostCreateRequest;
-import com.light.springinit.domain.dto.PostUpdateRequest;
-import com.light.springinit.param.PostCreateParam;
-import com.light.springinit.param.PostUpdateParam;
-import lombok.Data;
 
 /**
  * 帖子

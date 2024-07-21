@@ -52,6 +52,7 @@ public interface UserService extends IService<User> {
      */
     User findUserById(Long userId);
 
+
     /**
      * 检查用户是否存在和检查用户状态
      *

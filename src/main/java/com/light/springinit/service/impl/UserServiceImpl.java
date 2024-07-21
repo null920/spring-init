@@ -1,5 +1,6 @@
 package com.light.springinit.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.lang.Assert;
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -132,12 +133,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         return userMapper.findUserById(userId);
     }
 
-    @Override
+
     /**
      * 检查用户是否存在和检查用户状态
      *
-     * @param userId
+     * @param userId 用户id
      */
+    @Override
     public void checkUserExistAndStatus(Long userId) {
         // 校验用户是否存在
         User userById = userMapper.findUserById(userId);

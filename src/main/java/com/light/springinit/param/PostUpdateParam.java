@@ -15,7 +15,7 @@ import java.util.List;
 public class PostUpdateParam {
 
     @NotBlank(message = "帖子id不能为空")
-    private Long postId;
+    private String postId;
     /**
      * 标题
      */

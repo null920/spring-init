@@ -2,6 +2,7 @@ package com.light.springinit.domain.entity.convertor;
 
 import com.light.springinit.domain.entity.User;
 import com.light.springinit.domain.info.UserInfo;
+import com.light.springinit.domain.vo.UserVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.NullValueCheckStrategy;
@@ -16,13 +17,22 @@ public interface UserConvertor {
     UserConvertor INSTANCE = Mappers.getMapper(UserConvertor.class);
 
     /**
+     * 转换为info
+     *
+     * @param request
+     * @return
+     */
+    @Mapping(target = "userId", source = "request.userId")
+    public UserInfo mapToInfo(User request);
+
+    /**
      * 转换为vo
      *
      * @param request
      * @return
      */
     @Mapping(target = "userId", source = "request.userId")
-    public UserInfo mapToVo(User request);
+    public UserVO mapToVo(User request);
 
     /**
      * 转换为实体

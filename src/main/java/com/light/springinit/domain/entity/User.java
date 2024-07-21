@@ -2,14 +2,12 @@ package com.light.springinit.domain.entity;
 
 import cn.hutool.crypto.digest.DigestUtil;
 import com.baomidou.mybatisplus.annotation.*;
+import com.light.springinit.constant.UserRole;
+import com.light.springinit.domain.dto.UserRegisterRequest;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import com.light.springinit.constant.UserRole;
-import com.light.springinit.domain.dto.UserRegisterRequest;
-import com.light.springinit.param.UserRegisterParam;
-import lombok.Data;
 
 /**
  * 用户

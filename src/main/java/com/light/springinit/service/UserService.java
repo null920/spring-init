@@ -51,4 +51,12 @@ public interface UserService extends IService<User> {
      * @return 用户信息
      */
     User findUserById(Long userId);
+
+    /**
+     * 检查用户是否存在和检查用户状态
+     *
+     * @param userId 用户id
+     */
+    void checkUserExistAndStatus(Long userId);
+
 }

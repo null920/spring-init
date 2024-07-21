@@ -1,6 +1,8 @@
 package com.light.springinit.domain.vo;
 
+import com.light.springinit.domain.entity.convertor.UserConvertor;
 import com.light.springinit.domain.info.PostInfo;
+import com.light.springinit.domain.info.UserInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -56,7 +58,7 @@ public class PostVO implements Serializable {
     /**
      * 创建用户 id
      */
-    private Long userId;
+    private UserVO userVO;
 
     /**
      * 创建时间
@@ -75,7 +77,7 @@ public class PostVO implements Serializable {
         this.tags = postInfo.getTags();
         this.thumbNum = postInfo.getThumbNum();
         this.favourNum = postInfo.getFavourNum();
-        this.userId = postInfo.getUserId();
+        this.userVO = new UserVO(postInfo.getUserInfo());
         this.createTime = postInfo.getCreateTime();
         this.updateTime = postInfo.getUpdateTime();
     }

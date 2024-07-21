@@ -44,6 +44,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         if (userMapper.findByUsername(userRegisterRequest.getUsername()) != null) {
             throw new UserException(UserErrorCode.USER_NAME_EXIST);
         }
+        if (!userRegisterRequest.getPassword().equals(userRegisterRequest.getCheckPassword())) {
+            throw new UserException(UserErrorCode.USER_CHECK_PASSWORD_NOT_SAME);
+        }
         User user = new User();
         user.register(userRegisterRequest);
         UserOperateResponse registerResult = new UserOperateResponse();
@@ -109,7 +112,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         }
         UserQueryResponse<UserInfo> response = new UserQueryResponse<>();
         response.setSuccess(true);
-        UserInfo userInfo = UserConvertor.INSTANCE.mapToVo(user);
+        UserInfo userInfo = UserConvertor.INSTANCE.mapToInfo(user);
         response.setData(userInfo);
         return response;
     }
@@ -127,6 +130,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
             throw new UserException(UserErrorCode.USER_QUERY_PARAM_IS_NULL);
         }
         return userMapper.findUserById(userId);
+    }
+
+    @Override
+    /**
+     * 检查用户是否存在和检查用户状态
+     *
+     * @param userId
+     */
+    public void checkUserExistAndStatus(Long userId) {
+        // 校验用户是否存在
+        User userById = userMapper.findUserById(userId);
+        if (userById == null) {
+            throw new UserException(UserErrorCode.USER_NOT_EXIST);
+        }
+        // 校验用户状态
+        if (userById.getUserRole() == UserRole.BAN) {
+            throw new UserException(UserErrorCode.USER_STATUS_IS_BAN);
+        }
     }
 }
 

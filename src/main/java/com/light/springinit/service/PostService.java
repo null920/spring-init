@@ -1,6 +1,7 @@
 package com.light.springinit.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.light.springinit.common.PageRequest;
 import com.light.springinit.common.PageResponse;
 import com.light.springinit.common.response.PostOperateResponse;
 import com.light.springinit.common.response.PostQueryResponse;
@@ -25,6 +26,16 @@ public interface PostService extends IService<Post> {
      * @return 帖子操作响应
      */
     PostOperateResponse createPost(PostCreateRequest postCreateRequest);
+
+
+    /**
+     * 获取当前用户帖子列表（分页）
+     *
+     * @param pageRequest 分页参数
+     * @return 帖子列表
+     */
+    PageResponse<PostVO> getMyPagePost(PageRequest pageRequest);
+
 
     /**
      * 获取某个用户的所有帖子列表（分页）

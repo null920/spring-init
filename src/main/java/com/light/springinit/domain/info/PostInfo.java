@@ -1,6 +1,7 @@
 package com.light.springinit.domain.info;
 
 
+import com.light.springinit.domain.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -54,7 +55,7 @@ public class PostInfo implements Serializable {
     /**
      * 创建用户 id
      */
-    private Long userId;
+    private UserInfo userInfo;
 
     /**
      * 创建时间

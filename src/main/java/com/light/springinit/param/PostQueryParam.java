@@ -14,10 +14,10 @@ public class PostQueryParam extends PageRequest {
     /**
      * 用户id
      */
-    private Long userId;
+    private String userId;
 
     /**
      * 帖子id
      */
-    private Long postId;
+    private String postId;
 }

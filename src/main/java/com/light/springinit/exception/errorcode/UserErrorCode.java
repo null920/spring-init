@@ -23,6 +23,11 @@ public enum UserErrorCode implements ErrorCode {
     USER_PASSWORD_ERROR("USER_PASSWORD_ERROR", "用户密码错误"),
 
     /**
+     * 确认密码不一致
+     */
+    USER_CHECK_PASSWORD_NOT_SAME("USER_CHECK_PASSWORD_NOT_SAME", "确认密码不一致"),
+
+    /**
      * 用户状态不能进行操作
      */
     USER_STATUS_CANT_OPERATE("USER_STATUS_CANT_OPERATE", "用户状态不能进行操作"),

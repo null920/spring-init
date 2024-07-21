@@ -15,6 +15,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserLoginRequest extends BaseRequest {
+
+    private static final long serialVersionUID = 1L;
     /**
      * 用户名
      */

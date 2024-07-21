@@ -2,6 +2,7 @@ package com.light.springinit.exception;
 
 import com.google.common.collect.Maps;
 import com.light.springinit.common.result.Result;
+import com.light.springinit.exception.errorcode.PostErrorCode;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -37,6 +38,23 @@ public class GlobalWebExceptionHandler {
             errors.put(fieldName, errorMessage);
         });
         return errors;
+    }
+
+    /**
+     * 自定义参数类型转换异常处理器
+     *
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public Result illegalArgumentExceptionHandler(IllegalArgumentException ex) {
+        Result result = new Result();
+        result.setCode(PostErrorCode.POST_QUERY_PARAM_ERROR.getCode());
+        result.setMessage(PostErrorCode.POST_QUERY_PARAM_ERROR.getMessage());
+        result.setSuccess(false);
+        return result;
     }
 
     /**

@@ -4,6 +4,9 @@ spring:
   profiles:
     active: dev
   # 支持 swagger3
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    time-zone: Asia/Shanghai
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

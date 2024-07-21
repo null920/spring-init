@@ -81,7 +81,7 @@ public class UserController {
             throw new UserException(USER_NOT_EXIST);
         }
         user.setPassword(null);
-        return Result.success(UserConvertor.INSTANCE.mapToVo(user));
+        return Result.success(UserConvertor.INSTANCE.mapToInfo(user));
     }
 
     @PostMapping("/logout")

@@ -16,6 +16,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostQueryRequest extends PageRequest {
+
+    private static final long serialVersionUID = 1L;
+
     /**
      * 用户id
      */

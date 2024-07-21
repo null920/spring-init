@@ -18,11 +18,11 @@ public class PageRequest extends BaseRequest {
     /**
      * 当前页
      */
-    private int currentPage;
+    private int currentPage = 1;
     /**
      * 每页结果数
      */
-    private int pageSize;
+    private int pageSize = 10;
 
     /**
      * 排序字段

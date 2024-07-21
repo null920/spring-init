@@ -18,6 +18,11 @@ public enum PostErrorCode implements ErrorCode {
     POST_QUERY_PARAM_ERROR("POST_QUERY_PARAM_ERROR", "帖子查询参数错误"),
 
     /**
+     * 帖子查询参数为空
+     */
+    POST_QUERY_PARAM_IS_NULL("POST_QUERY_PARAM_IS_NULL", "帖子查询参数为空"),
+
+    /**
      * 没有权限进行此操作
      */
     POST_OPERATE_NO_AUTH("POST_OPERATE_NO_AUTH", "没有权限进行此操作"),
